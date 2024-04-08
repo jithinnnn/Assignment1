@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap') ;
+
+.form-container{
+    min-height: 100vh;
+    background-color: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container form{
+    padding: 20px;
+    background-color: aliceblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    width: 500px; 
+    border-radius: 5px;
+}
+
+.form-container form .box{
+    width: 100%;
+    border-radius: 5px;
+    padding: 12px 14px;
+    color: var(--black);
+    margin: 10px 0;
+    background-color: var(--black);
+}
+
+form a{
+    text-decoration: none;
+}
+
+.form-container form h2{
+    margin-bottom: 10px;
+    font-size: 50px;
+    color: navy;
+    text-transform: uppercase;
+    font-family: "Teko", sans-serif;;
+}
+
+.btn, .delete-btn{
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+    font-family: "Teko";
+    margin-top: 10px    ;
+}
+
+.btn:hover{
+    background-color: rgb(134, 134, 205);
+}
+
+.delete-btn:hover{
+    background-color: rgb(134, 134, 205);
+}
+
+.form-container form p{
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.form-container form p a:hover{
+    text-decoration: underline;
+}
+
+.message{
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+}
+
+.container{
+    min-height: 100vh;
+    background-color: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container .profile{
+    padding: 20px;
+    background-color: aliceblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    width: 400px; 
+    border-radius: 5px;
+}
+
+.profile a{
+    text-decoration: none;
+    color: rgb(124, 193, 193);
+}
+
+.profile h3{
+    margin: 5px 0;
+    font-size: 40px;
+}
+
+.profile p{
+    text-decoration: none;
+}
+
+.profile p:hover{
+    text-decoration: underline;
+}
+
+.update-profile{
+    min-height: 100vh;
+    background-color: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.update-profile form{
+    padding: 20px;
+    background-color: aliceblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    width: 400px; 
+    border-radius: 5px;
+}
+
+.update-profile form .flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.update-profile form .flex .inputBox{
+    width: 100%;
+}
+
+.update-profile form .flex .inputBox span{
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    font-size: 17px;
+    color: black;
+}
+
+.update-profile form .flex .inputBox .box{
+    width: 100%;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+    padding: 12px 14px;
+    box-sizing: border-box;
+    font-size: 17px;
+    color: black;
+    margin-top: 10px;
+}
+
+@media screen and (max-width:650px) {
+
+    .update-profile form .flex{
+        flex-wrap: wrap;
+        gap: 0;
+    }
+    .update-profile form .flex .inputBox{
+        width: 100%;
+    }
+    
+}
