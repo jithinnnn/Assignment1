@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
             <input type="email" name="email" placeholder="Enter Email" class="box" required> 
             <input type="password" name="password" placeholder="Enter Password" class="box" required>
             <input class="btn btn-primary" name="submit" type="submit" value="Login" class="btn">
-            <p>Don't have an account? <a href="register.php">Register Now!</a></p>
+            <p>Don't have an account? <a href="index.php">Register Now!</a></p>
         </form>
     </div>
 </body>

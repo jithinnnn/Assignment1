@@ -41,7 +41,7 @@ if(isset($_GET['logout'])){
                 <h4>Phone Number : <?php echo $fetch['phone'] ?></h4>
                <button class="btn"> <a href="update_profile.php">Update Profile</a></button>
                 <button class="delete-btn"><a href="home.php?logout=<?php echo $user_id;?>">Log Out</a></button>
-                <p>New <a href="login.php">Login</a> or <a href="register.php">Register</a></p>
+                <p>New <a href="login.php">Login</a> or <a href="index.php">Register</a></p>
         </div>
     </div>
 </body>
