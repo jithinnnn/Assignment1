@@ -6,26 +6,32 @@ if(isset($_POST['submit'])){
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, md5($_POST['password']));
 
-    // Query to check if the user exists and their account is approved
-    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$password' AND status = 'approved'") or die('query failed');
-
+    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$password'" ) or die('query failed');
+    
     if(mysqli_num_rows($select) > 0){
         $row = mysqli_fetch_assoc($select);
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['is_admin'] = $row['is_admin'];
-        $_SESSION['status'] = $row['status'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['password'] = $row['password'];
-        
-        if($_SESSION['is_admin'] == 1) {
-            header('location: admin.php');
-        } else {
-            header('location: home.php');
+        $status = $row['status'];
+
+        if($status == 'approved'){
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['is_admin'] = $row['is_admin'];
+            $_SESSION['status'] = $row['status'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['password'] = $row['password'];
+            
+            if($_SESSION['is_admin'] == 1) {
+                header('location: admin.php');
+            } else {
+                header('location: home.php');
+            }
+            exit; 
+        } elseif ($status == 'denied') {
+            $message[] = 'Your account has been denied access. Please contact the administrator for assistance.';
+        } elseif ($status == 'pending') {
+            $message[] = 'Your account is pending approval.';
         }
-        exit;
     } else {
-        // Account is either not approved or does not exist
-        $message[] = 'Your account is pending for approval!';
+        $message[] = 'Incorrect email or password!';
     }
 }
 ?>
