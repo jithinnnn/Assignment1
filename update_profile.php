@@ -6,10 +6,13 @@ $user_id = $_SESSION['user_id'];
 
 if(isset($_POST['update_profile'])){
      
-    $update_name = mysqli_real_escape_string($conn, $_POST['update_name']);
+    $update_fname = mysqli_real_escape_string($conn, $_POST['update_fname']); 
+    $update_lname = mysqli_real_escape_string($conn, $_POST['update_lname']); 
+    $update_name = mysqli_real_escape_string($conn, $_POST['update_name']); 
     $update_email = mysqli_real_escape_string($conn, $_POST['update_email']);
+    $update_phone = mysqli_real_escape_string($conn, $_POST['update_phone']); 
 
-    mysqli_query($conn,  "UPDATE `user_form` SET name ='$update_name',email='$update_email' WHERE id = '$user_id'") or die('query failed');
+    mysqli_query($conn,  "UPDATE `user_form` SET fname='$update_fname',lname='$update_lname', name ='$update_name',email='$update_email', phone='$update_phone' WHERE id = '$user_id'") or die('query failed');
 
 
     $old_pass = $_POST['old_pass'];
@@ -34,6 +37,13 @@ if(isset($_POST['update_profile'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+            margin: 0;
+}
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Profile</title>
@@ -59,10 +69,16 @@ if(isset($_POST['update_profile'])){
                     }
                 }
             ?>
+                    <span>First Name :</span>
+                    <input type="text" oninput=" this.value = this.value.replace(/[0-9]/g,'')" name="update_fname" class="box" value="<?php echo $fetch['fname'] ?>">
+                    <span>Last Name :</span>
+                    <input type="text" oninput=" this.value = this.value.replace(/[0-9]/g,'')" name="update_lname" class="box" value="<?php echo $fetch['lname'] ?>">
                     <span>Username :</span>
                     <input type="text" name="update_name" class="box" value="<?php echo $fetch['name'] ?>">
                     <span>Email :</span>
                     <input type="email" name="update_email" class="box" value="<?php echo $fetch['email'] ?>">
+                    <span>Phone Number :</span>
+                    <input type="number" name="update_phone" class="box" value="<?php echo $fetch['phone'] ?>">
                 </div>
                 <div class="inputBox">
                     <input type="hidden" value="<?php echo $fetch['password'] ?>" name="old_pass" id="">

@@ -5,9 +5,13 @@ session_start();
 if(isset($_POST['updatebtn'])){
 
     $id = $_POST['editid'];
+    $fname = $_POST['editfname'];
+    $lname = $_POST['editlname'];
     $email = $_POST['editemail'];
+    $phone = $_POST['editphone'];
 
-    $query = "UPDATE `user_form` SET email='$email' WHERE id = '$id'";
+
+    $query = "UPDATE `user_form` SET fname='$fname',lname='$lname', email='$email',phone='$phone' WHERE id = '$id'";
     $query_run = mysqli_query($conn,$query);
 
     if($query_run){
