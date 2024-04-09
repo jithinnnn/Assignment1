@@ -1,37 +1,34 @@
 <?php
-include 'config.php';
 session_start();
+include 'config.php';
 
 if(isset($_POST['submit'])){
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, md5($_POST['password']));
 
-
-    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$password'" ) or die('query failed');
+    // Query to check if the user exists and their account is approved
+    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$password' AND status = 'approved'") or die('query failed');
 
     if(mysqli_num_rows($select) > 0){
         $row = mysqli_fetch_assoc($select);
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['is_admin'] = $row['is_admin'];
-        
+        $_SESSION['status'] = $row['status'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['password'] = $row['password'];
         
         if($_SESSION['is_admin'] == 1) {
-            
             header('location: admin.php');
         } else {
             header('location: home.php');
         }
-        exit; 
+        exit;
     } else {
-        $message[] = 'Incorrect email or password!';
+        // Account is either not approved or does not exist
+        $message[] = 'Your account is pending for approval!';
     }
 }
 ?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +38,6 @@ if(isset($_POST['submit'])){
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="register.css">
-
 </head>
 <body>
     <div class="form-container">
@@ -61,4 +57,4 @@ if(isset($_POST['submit'])){
         </form>
     </div>
 </body>
-</html> 
+</html>

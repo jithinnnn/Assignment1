@@ -23,7 +23,7 @@
         <?php 
             include 'config.php';
 
-            $query = "SELECT * FROM `user_form`";
+            $query = "SELECT * FROM `user_form` WHERE status='pending' ORDER BY id ASC";
             $query_run = mysqli_query($conn,$query);
         ?>
     <table class="table table-bordered" id="dataTable" width="100%">
@@ -34,9 +34,8 @@
       <th scope="col">Last Name</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
+      <th scope="col">Phone </th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -52,15 +51,12 @@
       <td><?php echo $row['name']; ?></td>
       <td><?php echo $row['email']; ?></td>
       <td><?php echo $row['phone']; ?></td>
-      <td><form action="edit.php" method="post">
-        <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-            <button name="edit_btn" class="btn btn-primary">EDIT</button>
-         </form></td>
-      <td><form action="code.php" method="post">
-        <input type="hidden" name="delete_id" value="<?php echo $row['id'];  ?>">
-        <button type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+    <td><form action="admin-approval.php" method="POST">
+        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+        <input class="btn btn-success" type="submit" name="approve" value="Approve">
+        <input class="btn btn-danger" type="submit" name="deny" value="Deny">
     </form></td>
-    </tr>
+    </tr>   
     <?php
         }
     }
@@ -72,6 +68,33 @@
   </tbody>
 </table>
     </div>
-    <button class="btn btn-success"><a class="text-white" href="admin-approval.php">Requests</a></button>
+
+    <?php
+        if(isset($_POST['approve'])){
+            $id = $_POST["id"];
+
+            $select = "UPDATE `user_form` SET status = 'approved' WHERE id = '$id'";
+            $result = mysqli_query($conn,$select);
+
+            echo '<script type = "text/javascript">';
+            echo 'alert("User Approved!");';
+            echo 'window.location.href = "admin-approval.php"';
+            echo '</script>';
+
+        }
+
+        if(isset($_POST['deny'])){
+            $id = $_POST["id"];
+
+            $select = "DELETE FROM `user_form` WHERE id = '$id'";
+            $result = mysqli_query($conn,$select);
+
+            echo '<script type = "text/javascript">';
+            echo 'alert("User Denied!");';
+            echo 'window.location.href = "admin-approval.php"';
+            echo '</script>';
+
+        }
+    ?>
 </body>
 </html>

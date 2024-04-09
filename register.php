@@ -11,7 +11,7 @@
         $password = mysqli_real_escape_string($conn, md5($_POST['password']));
         $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
 
-        $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$password'" ) or die('query failed');
+        $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email'" ) or die('query failed');
 
         if(mysqli_num_rows($select) > 0){
             $message[] = "user already exists";
@@ -19,15 +19,8 @@
             if($password != $cpassword){
                 $message[]="Confirm Password not matching";
             }else{
-                $insert = mysqli_query($conn , "INSERT INTO `user_form` (fname,lname,name, email,phone, password) VALUES('$fname','$lname','$name','$email','$phone','$password')") or die ('query failed');
-
-                if($insert){
-                    $message[] = 'registered successfully';
-                    header('location:login.php');
-                }
-                else{
-                    $message[] = "registration failed";
-                }
+                $insert = mysqli_query($conn , "INSERT INTO `user_form` (fname,lname,name, email,phone, password,status) VALUES('$fname','$lname','$name','$email','$phone','$password','pending')") or die ('query failed');
+                $message[] = "Pending for Approval";
             }
         }
     }
@@ -41,6 +34,13 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+            margin: 0;
+}
+</style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register</title>
